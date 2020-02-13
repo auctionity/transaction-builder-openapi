@@ -1,0 +1,790 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Auctionity Transaction Builder API",
+    "version": "1.0.0-alpha",
+    "description": "Auctionity transaction builder"
+  },
+  "servers": [
+    {
+      "url": "https://tx.auctionity.com/"
+    }
+  ],
+  "paths": {
+    "/transaction/auction/{auctionId}/bid": {
+      "post": {
+        "summary": "Build a bid transaction",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/AuctionBidBody"
+        },
+        "parameters": [
+          {
+            "name": "auctionId",
+            "in": "path",
+            "required": true,
+            "description": "The auctionId to bid",
+            "schema": {
+              "$ref": "#/components/schemas/AuctionID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return bid transaction data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "to": {
+                      "$ref": "#/components/schemas/ContractAddress"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "gasPrice": {
+                      "$ref": "#/components/schemas/Hexadecimal"
+                    },
+                    "gasLimit": {
+                      "$ref": "#/components/schemas/Hexadecimal"
+                    }
+                  },
+                  "example": {
+                    "to": "0xfc6d0fe343a58b429d337b28ddb4655fb70fc0db",
+                    "data": "0xc9de1155c6e75eb221ec43ce8aece87f9d4e399b000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000ff5001f5c780d02c9433b926bc457ef2979fd588000000000000000000000000ff5001f5c780d02c9433b926bc457ef2979fd588",
+                    "gasLimit": "0x1dcd6500",
+                    "gasPrice": "0x0"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transaction/auction/create": {
+      "post": {
+        "summary": "Build create auction transaction",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CreateAuctionBody"
+        },
+        "responses": {
+          "200": {
+            "description": "Return auction creation transaction data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "to": {
+                      "$ref": "#/components/schemas/ContractAddress"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "gasPrice": {
+                      "$ref": "#/components/schemas/Hexadecimal"
+                    },
+                    "gasLimit": {
+                      "$ref": "#/components/schemas/Hexadecimal"
+                    }
+                  },
+                  "example": {
+                    "to": "0xfc6d0fe343a58b429d337b28ddb4655fb70fc0db",
+                    "data": "0xbf6d381941451874774dbdc0ac42262b44d5b5d1285fe6d7000000000000000000000000000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000f0000106012c8cf97bead5deae237070f9587f8e7a266d000000000000000000000000000000000000000000000000000000000000230d000000000000000000000000000000000000000000000000000000000000000a6c099b6664add0732ca57de47ece17a024c20410000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000015e4510b35e4510b800001e001e000000000000000000000000000000000000000000000000000000000000000a6c099b6664add0732ca57de47ece17a024c204101e321e0a0a00000000000000000000000000000000",
+                    "gasLimit": "0x1dcd6500",
+                    "gasPrice": "0x0"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transaction/auction/{auctionId}/end": {
+      "put": {
+        "summary": "Build end auction validation transaction",
+        "parameters": [
+          {
+            "name": "auctionId",
+            "in": "path",
+            "required": true,
+            "description": "The auctionId to end",
+            "schema": {
+              "$ref": "#/components/schemas/AuctionID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return auction voucher creation transaction data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "to": {
+                      "$ref": "#/components/schemas/ContractAddress"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "gasPrice": {
+                      "$ref": "#/components/schemas/Hexadecimal"
+                    },
+                    "gasLimit": {
+                      "$ref": "#/components/schemas/Hexadecimal"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transaction/deposit": {
+      "post": {
+        "summary": "Build deposit transaction",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/DepositBody"
+        },
+        "responses": {
+          "200": {
+            "description": "Return deposit transaction data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "from": {
+                      "$ref": "#/components/schemas/ContractAddress"
+                    },
+                    "to": {
+                      "$ref": "#/components/schemas/ContractAddress"
+                    },
+                    "gasPrice": {
+                      "$ref": "#/components/schemas/Hexadecimal"
+                    },
+                    "gasLimit": {
+                      "$ref": "#/components/schemas/Hexadecimal"
+                    },
+                    "data": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "to": "0xfc6d0fe343a58b429d337b28ddb4655fb70fc0db",
+                  "from": "0xff5001f5c780d02c9433b926bc457ef2979fd588",
+                  "data": "0xa9059cbb000000000000000000000000bdc18219ebb537557dc0c78b119b5659c575666f00000000000000000000000000000000000000000000000000000000000004d2",
+                  "gasLimit": "0x1dcd6500",
+                  "gasPrice": "0x0"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transaction/voucher": {
+      "post": {
+        "summary": "Voucher transaction",
+        "requestBody": {
+          "description": "A JSON object containing voucher informations",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "voucher": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "voucher": "0x12bc14bf00000000000000000000000000000000000000000000000000000000000000003ffef300598c53c390cc06992a95eeda792198eca1e81ae7a25c1752b4d67a03000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000034248586cd626bc7291fb1b6b4d9411c07eed1f89d000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000000000000000000000000000041149f323d86c5ad23fc54b2cdbf4e5486cbfb3be1ebc1ec562b42a855549897181799515d49a47073222c6774c2a669fa80596986388c0a0c2d90655963dcbf8d1b00000000000000000000000000000000000000000000000000000000000000"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return claim voucher transaction data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "to": {
+                      "$ref": "#/components/schemas/ContractAddress"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "gasPrice": {
+                      "$ref": "#/components/schemas/Hexadecimal"
+                    },
+                    "gasLimit": {
+                      "$ref": "#/components/schemas/Hexadecimal"
+                    }
+                  }
+                },
+                "example": {
+                  "to": "0xbdc18219ebb537557dc0c78b119b5659c575666f",
+                  "data": "0x12bc14bf00000000000000000000000000000000000000000000000000000000000000003ffef300598c53c390cc06992a95eeda792198eca1e81ae7a25c1752b4d67a03000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000034248586cd626bc7291fb1b6b4d9411c07eed1f89d000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000000000000000000000000000041149f323d86c5ad23fc54b2cdbf4e5486cbfb3be1ebc1ec562b42a855549897181799515d49a47073222c6774c2a669fa80596986388c0a0c2d90655963dcbf8d1b00000000000000000000000000000000000000000000000000000000000000",
+                  "gasLimit": "0x98834f",
+                  "gasPrice": "0xbdc18219ebb537557dc0c78b119b5659c575666f"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transaction/withdraw": {
+      "post": {
+        "summary": "Build withdraw transaction",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/WithdrawBody"
+        },
+        "responses": {
+          "200": {
+            "description": "Return a withdraw transaction data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "from": {
+                      "$ref": "#/components/schemas/ContractAddress"
+                    },
+                    "to": {
+                      "$ref": "#/components/schemas/ContractAddress"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "gasPrice": {
+                      "$ref": "#/components/schemas/Hexadecimal"
+                    },
+                    "gasLimit": {
+                      "$ref": "#/components/schemas/Hexadecimal"
+                    }
+                  },
+                  "example": {
+                    "to": "0xfc6d0fe343a58b429d337b28ddb4655fb70fc0db",
+                    "from": "0xff5001f5c780d02c9433b926bc457ef2979fd588",
+                    "data": "0xa2cea41600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a",
+                    "gasLimit": "0x1dcd6500",
+                    "gasPrice": "0x0"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "requestBodies": {
+      "AuctionBidBody": {
+        "description": "A JSON object containing bid informations",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "from": {
+                  "$ref": "#/components/schemas/ContractAddress"
+                },
+                "bid": {
+                  "$ref": "#/components/schemas/Bid"
+                }
+              },
+              "required": ["from", "bid"],
+              "example": {
+                "from": "0xFf5001f5C780D02C9433B926bc457Ef2979fd588",
+                "bid": {
+                  "amount": "0x01",
+                  "sponsor": "0xFf5001f5C780D02C9433B926bc457Ef2979fd588",
+                  "auctioneer": "0xFf5001f5C780D02C9433B926bc457Ef2979fd588"
+                }
+              }
+            }
+          }
+        }
+      },
+      "CreateAuctionBody": {
+        "description": "A JSON object containing auction creation informations",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": ["from", "auction"],
+              "properties": {
+                "from": {
+                  "$ref": "#/components/schemas/ContractAddress"
+                },
+                "auction": {
+                  "$ref": "#/components/schemas/AuctionForm"
+                }
+              },
+              "example": {
+                "from": "0xFf5001f5C780D02C9433B926bc457Ef2979fd588",
+                "auction": {
+                  "auctionId": "0x41451874774DBdC0ac42262b44D5B5d1285fe6D7",
+                  "currency": {
+                    "contractAddress": "0x6c099b6664ADD0732Ca57DE47eCE17a024c20410",
+                    "id": "0x00",
+                    "amount": "0x01"
+                  },
+                  "timeBegin": "0x5E4510B3",
+                  "timeEnd": "0x5E4510B8",
+                  "sponsor": "0x6c099b6664ADD0732Ca57DE47eCE17a024c20410",
+                  "antiSnippingTrigger": "0x1e",
+                  "antiSnippingDuration": "0x1e",
+                  "reward": {
+                    "master": "0x1e",
+                    "auctionSponsor": "0x32",
+                    "bidAuctioneer": "0x1e",
+                    "bidSponsor": "0xa",
+                    "lastBidSponsor": "0xa"
+                  },
+                  "bidIncrement": "0xa",
+                  "tokens": [
+                    {
+                      "contractAddress": "0x06012c8cf97BEaD5deAe237070F9587f8E7A266d",
+                      "id": "0x230d",
+                      "amount": "0xa"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "DepositBody": {
+        "description": "A JSON object containing deposit informations",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": ["from", "token"],
+              "properties": {
+                "from": {
+                  "$ref": "#/components/schemas/ContractAddress"
+                },
+                "token": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ERC1155"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ERC721"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ERC20"
+                    }
+                  ]
+                }
+              },
+              "example": {
+                "from": "0xFf5001f5C780D02C9433B926bc457Ef2979fd588",
+                "token": {
+                  "contractAddress": "0x06012c8cf97bead5deae237070f9587f8e7a266d",
+                  "id": "0x4d2",
+                  "amount": "0x01"
+                }
+              }
+            }
+          }
+        }
+      },
+      "WithdrawBody": {
+        "description": "A JSON object containing withdraw informations",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": ["from", "token"],
+              "properties": {
+                "from": {
+                  "$ref": "#/components/schemas/ContractAddress"
+                },
+                "token": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ERC1155"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ERC721"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ERC20"
+                    }
+                  ]
+                }
+              },
+              "example": {
+                "from": "0xFf5001f5C780D02C9433B926bc457Ef2979fd588",
+                "token": {
+                  "contractAddress": "0x0000000000000000000000000000000000000000",
+                  "id": "0x00",
+                  "amount": "0xa"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "AuctionID": {
+        "type": "string",
+        "pattern": "^0[xX][0-9a-fA-F]{32}$",
+        "description": "Auction UUID in hexadecimal format",
+        "example": "0xc6e75eb221ec43ce8aece87f9d4e399b"
+      },
+      "AuctionForm": {
+        "type": "object",
+        "properties": {
+          "auctionId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AuctionID"
+              },
+              {
+                "description": "Auction UUID in hexadecimal format"
+              }
+            ]
+          },
+          "currency": {
+            "allOf": [
+              {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ERC20"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ERC721"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ERC1155"
+                  }
+                ]
+              },
+              {
+                "description": "Currency of the auction"
+              }
+            ]
+          },
+          "timeBegin": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Hexadecimal"
+              },
+              {
+                "description": "Auction start date"
+              }
+            ]
+          },
+          "timeEnd": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Hexadecimal"
+              },
+              {
+                "description": "Auction end date"
+              }
+            ]
+          },
+          "sponsor": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContractAddress"
+              },
+              {
+                "description": "ETH Address of auction sponsor"
+              }
+            ]
+          },
+          "antiSnippingTrigger": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Hexadecimal"
+              },
+              {
+                "default": "0x1e"
+              }
+            ],
+            "description": "Auction anti-snipping trigger duration"
+          },
+          "antiSnippingDuration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Hexadecimal"
+              },
+              {
+                "default": "0x1e"
+              }
+            ],
+            "description": "Auction anti-snipping duration"
+          },
+          "reward": {
+            "type": "object",
+            "description": "Auction community reward",
+            "properties": {
+              "master": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Hexadecimal"
+                  },
+                  {
+                    "description": "Part of auction price to share with community"
+                  }
+                ]
+              },
+              "auctionSponsor": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Hexadecimal"
+                  },
+                  {
+                    "description": "Part of community reward to share with the auction sponsor"
+                  }
+                ]
+              },
+              "bidAuctioneer": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Hexadecimal"
+                  },
+                  {
+                    "description": "Part of community reward to share with the auctioneer"
+                  }
+                ]
+              },
+              "bidSponsor": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Hexadecimal"
+                  },
+                  {
+                    "description": "Part of community reward to share with the sponsors"
+                  }
+                ]
+              },
+              "lastBidSponsor": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Hexadecimal"
+                  },
+                  {
+                    "description": "Part of community reward to share with the last bid sponsor"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "bidIncrement": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Hexadecimal"
+              },
+              {
+                "description": "Bid increment in the currency"
+              }
+            ]
+          },
+          "tokens": {
+            "description": "List of tokens to sell in the auction",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ERC1155"
+                },
+                {
+                  "$ref": "#/components/schemas/ERC721"
+                },
+                {
+                  "$ref": "#/components/schemas/ERC20"
+                }
+              ]
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false,
+        "required": ["auctionId", "currency", "timeBegin", "timeEnd", "tokens"]
+      },
+      "Bid": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Hexadecimal"
+              },
+              {
+                "description": "Amount to bid"
+              }
+            ]
+          },
+          "sponsor": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContractAddress"
+              },
+              {
+                "description": "Bid sponsor"
+              }
+            ]
+          },
+          "auctioneer": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContractAddress"
+              },
+              {
+                "description": "Bid auctioneer"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": ["amount"]
+      },
+      "ContractAddress": {
+        "description": "Valid ETH address",
+        "type": "string",
+        "pattern": "^0x([A-Fa-f0-9]{40})$"
+      },
+      "ERC20": {
+        "type": "object",
+        "description": "ERC20 token",
+        "properties": {
+          "contractAddress": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContractAddress"
+              },
+              {
+                "default": "0x0000000000000000000000000000000000000000"
+              },
+              {
+                "description": "ERC20 contract address"
+              }
+            ]
+          },
+          "amount": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Hexadecimal"
+              },
+              {
+                "default": "0x01"
+              },
+              {
+                "description": "Amount of ERC20"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "ERC721": {
+        "type": "object",
+        "properties": {
+          "contractAddress": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContractAddress"
+              },
+              {
+                "default": "0x0000000000000000000000000000000000000000"
+              },
+              {
+                "description": "ERC721 contract address"
+              }
+            ]
+          },
+          "id": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Hexadecimal"
+              },
+              {
+                "default": "0x00"
+              },
+              {
+                "description": "ID of ERC721"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "ERC1155": {
+        "type": "object",
+        "properties": {
+          "contractAddress": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContractAddress"
+              },
+              {
+                "default": "0x0000000000000000000000000000000000000000"
+              },
+              {
+                "description": "ERC1155 contract address"
+              }
+            ]
+          },
+          "id": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Hexadecimal"
+              },
+              {
+                "default": "0x00"
+              },
+              {
+                "description": "ID of ERC1155"
+              }
+            ]
+          },
+          "amount": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Hexadecimal"
+              },
+              {
+                "default": "0x01"
+              },
+              {
+                "description": "Amount of ERC721"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "Hexadecimal": {
+        "type": "string",
+        "pattern": "^0[xX][0-9a-fA-F]{0,64}$"
+      }
+    }
+  }
+}
